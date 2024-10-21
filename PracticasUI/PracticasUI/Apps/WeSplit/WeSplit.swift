@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WeSplit: View {
-
+    
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
@@ -18,7 +18,7 @@ struct WeSplit: View {
         
         return amountPerPerson
     }
-
+    
     var body: some View {
         NavigationStack{
             Form{
@@ -52,7 +52,7 @@ struct WeSplit: View {
             .navigationTitle("WeSplit")
         }
     }
- }
+}
 
 #Preview {
     WeSplit()
