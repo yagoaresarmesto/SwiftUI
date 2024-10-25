@@ -16,6 +16,7 @@ struct ChallengeOne: View {
         switch (input, output) {
         case ("Fahrenheit", "Celsius"):
             resultado = (cantidad - 32) * 5 / 9
+            
         case ("Fahrenheit", "Kelvin"):
             resultado = (amount - 32) * 5 / 9 + 273.15
             
@@ -36,6 +37,7 @@ struct ChallengeOne: View {
         
         return resultado
     }
+    
     var body: some View {
         Form {
             Section ("Temperatura inicial:"){
