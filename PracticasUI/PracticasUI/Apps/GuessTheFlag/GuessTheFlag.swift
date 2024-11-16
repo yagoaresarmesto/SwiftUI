@@ -6,6 +6,7 @@ struct GuessTheFlag: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var score = 0
     
     var body: some View {
         ZStack {
@@ -36,7 +37,7 @@ struct GuessTheFlag: View {
         .alert(scoreTitle, isPresented:  $showingScore){
             Button("Continue", action: askQuestion)
         } message: {
-            Text("Your score is ???")
+            Text("Your score is \(score)")
                 .foregroundStyle(.white)
                    .font(.title.bold())
         }
@@ -45,6 +46,7 @@ struct GuessTheFlag: View {
     func flagTapped(_ number: Int){
         if number == correctAnswer {
             scoreTitle = "Correct"
+            score += 1
         } else {
             scoreTitle = "Wrong"
         }
@@ -58,8 +60,6 @@ struct GuessTheFlag: View {
     
     
 }
-
-
 
 #Preview {
     GuessTheFlag()
