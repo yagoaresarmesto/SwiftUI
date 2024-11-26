@@ -4,7 +4,7 @@ import SwiftUI
 struct PracticasUIApp: App {
     var body: some Scene {
         WindowGroup {
-            WordScramble()
+            Challenge2()
         }
     }
 }
