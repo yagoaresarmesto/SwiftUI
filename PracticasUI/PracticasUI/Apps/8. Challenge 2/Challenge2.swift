@@ -23,7 +23,6 @@ struct Challenge2: View {
                     .pickerStyle(SegmentedPickerStyle())
                     Button("Empezar ronda") {
                         startGame()
-                        
                     }
                 }
                 Spacer()
