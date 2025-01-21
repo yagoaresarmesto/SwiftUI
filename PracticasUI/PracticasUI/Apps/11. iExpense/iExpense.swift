@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ExpenseItem: Identifiable { //Así ya no necesitamos indicar al foreach que prodpiedad user como id
-    let id = UUID() //Que genere un id de forma automática
+struct ExpenseItem: Identifiable, Codable { //Así ya no necesitamos indicar al foreach que prodpiedad user como id
+    var id = UUID() //Que genere un id de forma automática
     let name: String
     let type: String
     let amount: Double
@@ -9,7 +9,24 @@ struct ExpenseItem: Identifiable { //Así ya no necesitamos indicar al foreach q
 
 @Observable
 class Expenses {
-    var items = [ExpenseItem]()
+    var items = [ExpenseItem]() {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(items) {
+                UserDefaults.standard.set(encoded, forKey: "Items")
+            }
+        }
+    }
+
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+                items = decodedItems
+                return
+            }
+        }
+
+        items = []
+    }
 }
 
 
