@@ -1,14 +1,11 @@
 import SwiftUI
 
-struct AddView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    
+//Para añadir
+
+struct AddView2: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = 0.0
-    
-    var expenses: Expenses
     
     let types = ["Business", "Personal"]
     
@@ -23,21 +20,14 @@ struct AddView: View {
                     }
                 }
                 
-                TextField("Amounr", value: $amount, format: .currency(code: "USD"))
+                TextField("Amount", value: $amount, format: .currency(code: "USD"))
                     .keyboardType(.decimalPad)
             }
             .navigationTitle("Add new expense")
-            .toolbar {
-                Button("Save"){
-                    let item = ExpenseItem(name: name, type: type, amount: amount)
-                    expenses.items.append(item)
-                    dismiss()
-                }
-            }
         }
     }
 }
 
 #Preview {
-    AddView(expenses: Expenses())
+    AddView2()
 }
