@@ -12,6 +12,10 @@ extension Bundle {
         }
         
         let decoder = JSONDecoder()
+        //Formato para la fecha
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy-MM-dd"
+        decoder.dateDecodingStrategy = .formatted(formatter)
         
         //Método para que mirar que salió mal en la decodificación, con diferentes posibles errores
         do {
