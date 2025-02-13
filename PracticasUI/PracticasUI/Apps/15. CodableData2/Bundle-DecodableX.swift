@@ -1,9 +1,9 @@
 import Foundation
 
-//Aquí convertiremos el .json de astronatuas en un array de Astronautas, usaremos un Bunfle para encontrar la ruta del archivo, cargarlo en una isntacia de Data y lo pasaremos a través de un JSONDecoder.
+//Aquí convertiremos el .json de astronatuas en un array de Astronautas, usaremos un Bundle para encontrar la ruta del archivo, cargarlo en una isntacia de Data y lo pasaremos a través de un JSONDecoder. Vamos a usar genéricos para que pueda leer ambos json
 
 extension Bundle { //Extiende la funcionalidad de Bundle con un método personalizado
-    func decode (_ file: String) -> [String: AstronautX] { //Define una funcion que recibe el nombre del archivo y devuleve un diccionario de Astronautas
+    func decodeX<T: Codable>(_ file: String) -> T { //Define una funcion que recibe el nombre del archivo y devuleve un diccionario de Astronautas
         guard let url = self.url(forResource: file, withExtension: nil) else {
             fatalError("Error al localizar \(file) en el bundle.")
         }
@@ -14,9 +14,14 @@ extension Bundle { //Extiende la funcionalidad de Bundle con un método personal
         
         let decoder = JSONDecoder()
         
+        //Aquí es el decodificador de fecha, para cmabiar el formato de fecha
+        let formatter = DateFormatter()
+        formatter.dateFormat = "y-MM-dd"
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
         //Esta parte del método ahora me dirá que salió mal con la decodificación
         do {
-            return try decoder.decode([String: AstronautX].self, from: data)
+            return try decoder.decode(T.self, from: data)
         } catch DecodingError.keyNotFound(let key, let context) {
             fatalError("Error al decodificar \(file) del bundle porque falta clave '\(key.stringValue)' – \(context.debugDescription)")
         } catch DecodingError.typeMismatch(_, let context) {
