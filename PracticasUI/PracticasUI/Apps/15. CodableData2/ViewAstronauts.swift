@@ -14,7 +14,7 @@ struct ViewAstronauts: View {
                 LazyVGrid(columns: columns){
                     ForEach(missions){ mission in
                         NavigationLink {
-                            Text("Detalles")
+                            ViewMission(mission: mission, astronauts: astronauts)
                         } label: {
                             VStack {
                                 Image(mission.image)
@@ -23,7 +23,7 @@ struct ViewAstronauts: View {
                                     .frame(width: 100, height: 100)
                                     .padding()
                                 
-                                VStack{
+                                VStack(alignment: .leading){
                                     Text(mission.displayName)
                                         .font(.headline)
                                         .foregroundStyle(.white)

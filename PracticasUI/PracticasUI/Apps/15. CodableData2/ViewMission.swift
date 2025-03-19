@@ -28,6 +28,35 @@ struct ViewMission: View {
                     Text(mission.description)
                 }
                 .padding(.horizontal)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack {
+                        ForEach(crew, id: \.role) { crewMember in
+                            NavigationLink {
+                                Text("Detalles del astronauta")
+                            } label: {
+                                HStack {
+                                    Image(crewMember.astronaut.id)
+                                        .resizable()
+                                        .frame(width: 104, height: 72)
+                                        .overlay(
+                                            Capsule()
+                                                .stroke(.white, lineWidth: 1)
+                                        )
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(crewMember.astronaut.name)
+                                            .foregroundStyle(.white)
+                                            .font(.headline)
+                                        
+                                        Text(crewMember.role)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .padding(.bottom)
         }
